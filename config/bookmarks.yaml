@@ -1,0 +1,113 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/latest/configs/bookmarks
+
+- Server:
+    - Animated folders for Unraid:
+        - abbr: H
+          href: https://github.com/hernandito/unRAID-Docker-Folder-Animated-Icons---Alternate-Colors/tree/master
+          icon: https://github.com/hernandito/unRAID-Docker-Folder-Animated-Icons---Alternate-Colors/blob/master/Orange-Collection/png/orange-productivity.png?raw=true
+    - Homepage icon directory:
+        - abbr: GH
+          href: https://github.com/walkxcode/dashboard-icons/tree/main/png
+          icon: homepage.png
+    - TRaSH Guides:
+        - abbr: GH
+          href: https://trash-guides.info/
+          icon: trash-guides.png
+    - Newshosting:
+        - abbr: GH
+          href: https://controlpanel.newshosting.com/customer/index.php
+          icon: https://pbs.twimg.com/profile_images/522108941417730048/tapA5YCG_400x400.jpeg
+    - Pure Usenet:
+        - abbr: GH
+          href: https://www.pureusenet.nl/en/login?backurl=%2Fen%2Fmember
+          icon: https://cms-static.pureusenet.nl/s1/p/NituC8GokGUUqGPhKeYeBX/r/EE47AHHnSqNYhBu2Lb12D3/c/Kc6MznGKMqbu5D9rvwSwPf/v/www.pureusenet.nl/e/pureusenet.nl/s/default/img/pure-logo.png
+    - PIA vpn:
+        - abbr: GH
+          href: https://www.privateinternetaccess.com/account/client-control-panel#subscription-overview
+          icon: https://www.privateinternetaccess.com/assets/pia_menu_logo_light-0d0c43737c0f3f27001737057c341b12c0128689b2ab32d0620756e4388906cd.svg
+- Favourites:
+    - Reddit:
+        - abbr: RE
+          href: https://reddit.com/
+          icon: reddit.png
+    - Instagram:
+        - abbr: RE
+          href: https://www.instagram.com/
+          icon: instagram.png
+    - Imgur:
+        - abbr: RE
+          href: https://imgur.com/user/Funkstew/posts
+          icon: https://play-lh.googleusercontent.com/gjX-aBU0iIAmfJqUWg8rWifLPDWNwRe0aIj46216Bq0cpKnEm6nC3pG7-3uh56wd5AE=s94-rw
+    - X (Twitter):
+        - abbr: RE
+          href: https://x.com/home
+          icon: x.png
+    - Discord:
+        - abbr: RE
+          href: https://discord.com/channels/186648463541272576
+          icon: discord.png
+
+- Entertainment:
+    - YouTube:
+        - abbr: YT
+          href: https://youtube.com/
+          icon: youtube.png
+    - Chess:
+        - abbr: YT
+          href: https://www.chess.com/home
+          icon: https://images.chesscomfiles.com/uploads/v1/images_users/tiny_mce/PedroPinhata/phpkXK09k.png
+    - SHH:
+        - abbr: YT
+          href: https://www.superherohype.com/
+          icon: https://i.pinimg.com/280x280_RS/6f/84/e1/6f84e1466ebb9cec2f3fd64d49782106.jpg
+    - IMDb:
+        - abbr: YT
+          href: https://www.imdb.com/
+          icon: https://pbs.twimg.com/profile_images/1674562292586012673/avGDzo8C_400x400.jpg
+    - IMDbPro:
+        - abbr: YT
+          href: https://pro.imdb.com/name/nm3037243?ref_=hm_prof_name
+          icon: https://www.editorsguild.com/Portals/0/Images/IMDB%20PRO%20Seminar%202022%20%203.JPG
+
+- Network Configs:
+    - Cloudflare:
+        - abbr: YT
+          href: https://dash.cloudflare.com/247f76d6700a485296ec165154f8a5e0
+          icon: cloudflare.png
+    - Cloudflare Tunnels:
+        - abbr: YT
+          href: https://one.dash.cloudflare.com/247f76d6700a485296ec165154f8a5e0/networks/tunnels?search=
+          icon: cloudflare-zero-trust.png
+    - GoDaddy:
+        - abbr: YT
+          href: https://dashboard.godaddy.com/venture?domainName=daireglynn.com
+          icon: https://pbs.twimg.com/media/EOPy-zAXUAAjm6U.jpg
+    - FritzBox:
+        - abbr: YT
+          href: http://192.168.178.1/
+          icon: http://192.168.178.1/assets/logos/logo_fritzDiamond.svg
+    - Homepage Settings:
+        - abbr: YT
+          href: https://gethomepage.dev/latest/
+          icon: homepage.png
+        
+- Download Directories:
+    - hawke.uno:
+        - abbr: YT
+          href: https://hawke.uno/users/funkstew/settings/security
+          icon: https://hawke.uno/img/hone.gif
+    - NZB.su:
+        - abbr: YT
+          href: https://nzb.su/browse
+          icon: https://nzb.su/templates/dark/images/logo.png
+    - Drunken Slug:
+        - abbr: YT
+          href: https://drunkenslug.com/
+          icon: https://cdn-b.saashub.com/images/app/service_logos/22/a4096d880e73/large.png?1545738040
+    - myanonamouse:
+        - abbr: YT
+          href: https://www.myanonamouse.net/
+          icon: https://cdn.myanonamouse.net/favicon-32x32.png?v=b%22
+

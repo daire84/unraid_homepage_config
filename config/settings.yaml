@@ -1,0 +1,122 @@
+# Homepage Configuration
+# For detailed configuration options and examples, please refer to:
+# https://gethomepage.dev/latest/configs/settings
+
+# API Providers
+# These are used for various integrations like weather services
+providers:
+  openweathermap: openweathermapapikey  # Replace with your actual OpenWeatherMap API key
+  weatherapi: weatherapiapikey  # Replace with your actual WeatherAPI key
+
+# Favicon Configuration
+# This sets the icon displayed in the browser tab
+favicon: /icons/kitty.png
+# Alternative option: https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/unraid-alt.png
+
+# Global Style Settings
+# Uncomment the line below to change the status indicator style to dots
+# statusStyle: "dot"
+
+# Header Style (Options include: underlined, boxed, clean or boxedWidgets)
+headerStyle: underlined
+
+# You can configure a fixed theme (and disable the theme switcher) by passing the theme option, like so:
+theme: dark # or light
+
+# You can configured a fixed color palette (and disable the palette switcher) by passing the color option, like so:
+color: slate
+
+# Hide the visible API error messages either globally in settings.yaml:
+# hideErrors: true
+
+# or per service widget (services.yaml) with:
+
+#- Example Service:
+#    ...
+#    widget:
+#    ...
+#        hideErrors: true
+
+# Background Configuration
+background:
+  image: /images/supe2.jpg
+  # High-resolution background image URL
+  # Alternative option: https://images.unsplash.com/photo-1560232216-3d0dcb7afd5f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D
+  # Alternative option: http://m.gettywallpapers.com/wp-content/uploads/2022/06/Dark-Wallpaper-8k.jpg
+  blur: "sm" # sm, "", md, xl... see https://tailwindcss.com/docs/backdrop-blur
+  saturate: 75 # 0, 50, 100... see https://tailwindcss.com/docs/backdrop-saturate
+  brightness: 70 # 0, 50, 75... see https://tailwindcss.com/docs/backdrop-brightness
+  opacity: 20 # 0-100
+  
+  # Card blur effect (options: sm, md, lg, xl, 2xl, 3xl)
+  # For more options, see: https://tailwindcss.com/docs/backdrop-blur
+  # cardBlur: 3xl # You can apply a blur filter to the service & bookmark cards. Note this option is incompatible with the background blur, saturate and brightness filters.
+
+# Layout Configuration
+# This defines the structure and appearance of different sections in your dashboard
+layout:
+  Home Assistant:  # This dot represents a section without a visible header
+    style: row
+    columns: 1
+    header: false
+
+  Infrastructure:
+    style: row
+    columns: 3
+    icon: unraid.png
+
+  System Monitor:
+    style: row
+    columns: 4
+    icon: glances.png
+    useEqualHeights: true  # Ensures all items in this section have the same height
+
+  Media Upcoming:
+    style: row
+    columns: 3
+    icon: radarr.png
+
+  Starr Apps:
+    style: row
+    columns: 3
+    icon: radarr.png
+
+  Starr Schedules:
+    style: row
+    columns: 1
+    icon: sonarr.png
+    header: false
+
+  Most Recent:
+    style: row
+    columns: 3
+    icon: tautulli.png
+    useEqualHeights: true  # Ensures all items in this section have the same height
+    header: false
+
+  Media:
+    style: row
+    columns: 2
+    icon: plex-alt-light.png
+    useEqualHeights: true  # Ensures all items in this section have the same height
+
+  Downloaders:
+    style: row
+    columns: 2
+    icon: sabnzbd.png
+
+  Cloud Services:
+    style: row
+    columns: 2
+    icon: cloudflare.png
+
+  System:
+    style: row
+    columns: 4
+    icon: terminal.svg
+    useEqualHeights: true  # Ensures all items in this section have the same height
+  System 2:
+    style: row
+    columns: 3
+    header: false
+    useEqualHeights: true  # Ensures all items in this section have the same height

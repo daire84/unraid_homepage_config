@@ -1,0 +1,125 @@
+---
+# Homepage Widgets Configuration
+# Last updated: [Current Date]
+# For configuration options and examples, please see:
+# https://gethomepage.dev/latest/configs/service-widgets
+
+- logo:
+    icon: /icons/funkone.jpg
+    # Alternative icons:
+    # icon: https://imgur.com/r2mGIhM.png
+    # icon: https://i.imgur.com/X0k8Hah.png
+    # icon: https://i.imgur.com/8oA8sIj.gif
+- greeting:
+    text_size: 2xl
+    text: Welcome to the Funkzone - Home of Funkserver
+          
+- datetime:
+    text_size: 2xl
+    locale: ie
+    format:
+      timeStyle: short
+      dateStyle: short
+
+- resources:
+    label: System Stats
+    cpu: true
+    memory: true
+    cputemp: true
+    tempmin: 0
+    tempmax: 100
+    uptime: true
+    units: metric
+    refresh: 3000
+    diskUnits: bytes
+    expanded: true 
+
+- resources:
+    label: Array Disks
+    expanded: true
+    disk:
+      - /disk1
+      - /disk2
+      - /disk3
+      - /disk4
+
+- resources:
+    label: Cache
+    expanded: true
+    disk:
+      - /cache
+
+- search:
+    provider: google
+    target: _blank
+
+- openmeteo:
+    label: Greystones
+    latitude: 53.1408
+    longitude: -6.0631
+    timezone: Europe/Dublin
+    units: metric
+    cache: 5
+    format:
+      maximumFractionDigits: 0
+
+# New and enhanced widgets
+
+#- docker:
+#    label: Docker Containers
+#    server: unix:///var/run/docker.sock
+#    expanded: true
+
+#- unifi:
+#    title: Network Status
+#    url: https://unifi.yourdomain.com
+#    username: your_username
+#    password: your_password
+#    site: default
+
+#- gotify:
+#    label: Notifications
+#    url: http://gotify.yourdomain.com
+#    token: your_app_token
+
+#- glances:
+#    label: System Monitor
+#    url: http://glances.yourdomain.com
+
+#- uptimekuma:
+#    label: Service Status
+#    url: http://uptime-kuma.yourdomain.com
+#    slug: homepage
+
+#- sonarr:
+#    label: Sonarr
+#    url: http://sonarr.yourdomain.com
+#    key: your_api_key
+
+#- radarr:
+#    label: Radarr
+#    url: http://radarr.yourdomain.com
+#    key: your_api_key
+
+#- plex:
+#    label: Plex Status
+#    url: http://plex.yourdomain.com
+#    key: your_plex_token
+
+
+#- kubernetes:
+#    label: Kubernetes Status
+#    cluster: your-cluster-name
+#    namespace: default
+
+#- coinmarketcap:
+#    coins:
+#      - bitcoin
+#      - ethereum
+#    currency: USD
+#    key: your_api_key
+
+#- iframe:
+#    label: Network Diagram
+#    url: http://yourdomain.com/network-diagram.html
+#    height: 300

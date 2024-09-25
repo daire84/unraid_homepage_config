@@ -1,0 +1,747 @@
+# Homepage Configuration
+# Last updated: [Current Date]
+# This configuration sets up various services for a home server environment,
+# including infrastructure, media management, downloaders, and monitoring.
+
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/latest/configs/services
+
+# Infrastructure Section
+# Core services for server and network management
+- Infrastructure:
+    - Unraid:
+        href: http://192.168.178.121/Dashboard
+        description: Funkserver - Media Centre
+        icon: unraid-alt.png
+        ping: http://192.168.178.121/
+    - Portainer:
+        href: http://192.168.178.121:9000/#!/auth
+        description: Docker Management
+        icon: portainer.png
+        ping: http://192.168.178.121:9000
+    - Notifiarr:
+        href: http://192.168.178.121:5456/
+        description: Notifiarr Client management
+        # Consider using a local icon for consistency
+        icon: https://avatars.githubusercontent.com/u/77931263?s=200&v=4
+        ping: http://192.168.178.121:5456
+    - Prowlarr:
+        href: http://192.168.178.121:9696/
+        description: Arr organizer
+        icon: prowlarr.png
+        ping: http://192.168.178.121:9696
+    - AdGuard Home:
+        href: http://192.168.178.123:3000/
+        description: Network-wide ad blocking
+        icon: adguard-home.png
+        server: docker
+        container: AdGuard-Home
+        # TODO: Set up widget once credentials are properly secured
+        #widget:
+        #  type: adguard
+        #  url: http://192.168.178.123:3000
+        #  username: {{HOMEPAGE_VAR_ADGUARD_USERNAME}}
+        #  password: {{HOMEPAGE_VAR_ADGUARD_PASSWORD}}
+    - Vaultwarden:
+        href: https://warden.funkstew.com
+        description: Password Manager
+        icon: bitwarden.png
+        server: docker
+        container: vaultwarden
+
+# Home Automation Section
+- Home Assistant:          
+    - Home Assistant:
+        href: http://funkassist.local:8123/lovelace/0
+        description: All-in-one home automation
+        icon: home-assistant.png
+        ping: http://192.168.178.171/
+        # Custom widget configuration to show specific sensors and states
+        widget:
+          type: homeassistant
+          url: http://192.168.178.171:8123
+          key: {{HOMEPAGE_VAR_HASSIO_API}}
+          custom:
+           - state: person.evan
+           - state: person.beau
+           - state: person.eilis
+           # Custom template to count number of lights on
+           - template: "{{ states.light|selectattr('state','equalto','on')|list|length }}"
+             label: lights on
+           # Uncomment to show weather information
+           # - state: weather.home
+           #   label: Temperature
+           #   value: "{attributes.temperature} {attributes.temperature_unit}"
+
+# Media Management Section
+# Services related to media downloading, streaming, and organization
+- Starr Apps:
+    - Radarr:
+        href: http://192.168.178.121:7878/
+        description: Movie downloads and management
+        icon: radarr-light.png
+        ping: http://192.168.178.121:7878
+        server: docker
+        container: radarr
+        widget:
+          type: radarr
+          url: http://192.168.178.121:7878
+          key: {{HOMEPAGE_VAR_RADARR_API}}
+          # API key is set in the .env file for security
+    - Sonarr:
+        href: http://192.168.178.121:8989/
+        description: TV Show downloads and management
+        icon: sonarr.png
+        ping: http://192.168.178.121:8989
+        server: docker
+        container: sonarr
+        widget:
+          type: sonarr
+          url: http://192.168.178.121:8989
+          key: {{HOMEPAGE_VAR_SONARR_API}}
+                  # API key is set in the .env file for security
+    - Overseerr:
+        href: https://overseerr.funkstew.com/
+        description: Media requests and user management
+        icon: overseerr.png
+        ping: http://192.168.178.121:8455
+        server: docker
+        container: overseerr
+        # Requires Radarr and Sonarr to be configured for full functionality
+        widget:
+          type: overseerr
+          url: https://overseerr.funkstew.com/
+          key: {{HOMEPAGE_VAR_OVERSEERR_API}}                          
+
+# Media Streaming and Management
+- Media:
+     - Plex:
+        icon: plex-alt-light.png
+        href: http://192.168.178.121:32400/web/index.html#!/
+        description: Watch movies and TV shows
+        ping: http://192.168.178.121:32400
+        server: docker
+        container: Plex-Media-Server
+        widget:
+          type: plex
+          url: http://192.168.178.121:32400
+          key: {{HOMEPAGE_VAR_PLEX_TOKEN}}
+     - Tautulli:
+         href: http://192.168.178.121:8182/home
+         description: Plex statistics and monitoring
+         icon: tautulli.png
+         ping: http://192.168.178.121:8182
+         server: docker
+         container: tautulli
+         widget:
+          type: tautulli
+          url: http://192.168.178.121:8182
+          key: {{HOMEPAGE_VAR_TAUTULLI_API}}
+          enableUser: true # Shows which user is streaming
+          showEpisodeNumber: true # Useful for tracking TV show progress
+          expandOneStreamToTwoRows: true # Provides more detailed information per stream
+     - Tdarr:
+        href: http://192.168.178.121:8265/
+        description: Automated media transcoding
+        icon: tdarr.png
+        ping: http://192.168.178.121:8265
+        server: docker
+        container: tdarr        
+        widget:
+         type: tdarr
+         url: http://192.168.178.121:8265
+     - Wizarr:
+         href: https://invites.funkstew.com/
+         description: Invite manager for Plex & Overseerr
+         icon: wizarr.png
+         ping: http://192.168.178.121:5690
+         server: docker
+         container: wizarr
+
+# Download Management Section
+- Downloaders:
+    - SABnzb:
+        href: http://192.168.178.121:8084/
+        description: Usenet downloader
+        icon: sabnzbd-alt.png
+        ping: http://192.168.178.121:8084
+        widget:
+          type: sabnzbd
+          url: http://192.168.178.121:8084
+          key: {{HOMEPAGE_VAR_SABNZB_API}}
+    - qBittorrent:
+        href: http://192.168.178.121:8080/
+        description: Torrent downloader
+        icon: qbittorrent.png
+        ping: http://192.168.178.121:8080
+        widget:
+          type: qbittorrent
+          url: http://192.168.178.121:8080
+          username: {{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}
+          password: {{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}
+
+# Cloud Services Section
+- Cloud Services:
+    - Immich:
+        href: http://pics.funkstew.com
+        description: Self-hosted photo and video backup
+        icon: immich.png
+        ping: http://192.168.178.121:8088
+        widget:
+         type: immich
+         url: http://192.168.178.121:8088
+         key: {{HOMEPAGE_VAR_IMMICH_API}}
+    - Nextcloud:
+        href: http://nextcloud.funkstew.com
+        description: Self-hosted cloud storage and collaboration
+        icon: nextcloud.png
+        ping: http://192.168.178.121:444
+        widget:
+         type: nextcloud
+         url: https://192.168.178.121:444
+         username: {{HOMEPAGE_VAR_NEXTCLOUD_USERNAME}}
+         password: {{HOMEPAGE_VAR_NEXTCLOUD_PASSWORD}}
+
+# System Management and Monitoring Section
+- System:
+    - Nginx Proxy Manager:
+        href: http://192.168.178.121:7818/
+        description: Reverse proxy management
+        icon: nginx-proxy-manager.png
+        widget:
+         type: npm
+         url: http://192.168.178.121:7818
+         username: {{HOMEPAGE_VAR_NPM_USERNAME}}
+         password: {{HOMEPAGE_VAR_NPM_PASSWORD}}          
+    - Speedtest Tracker:
+        href: http://192.168.178.121:8484/
+        description: Periodic Internet speed testing
+        icon: speedtest-tracker-old.png
+        widget:
+         type: speedtest
+         url: http://192.168.178.121:8484
+    - Uptime Kuma:
+        href: http://192.168.178.121:3001/
+        description: Service uptime monitoring
+        icon: uptime-kuma.png
+        widget:
+         type: uptimekuma
+         url: http://192.168.178.121:3001
+         slug: homepage
+    - Scrutiny:
+        href: http://192.168.178.121:8487/
+        description: Hard drive S.M.A.R.T monitoring
+        icon: scrutiny-light.png
+        widget:
+         type: scrutiny 
+         hideErrors: true
+         url: http://192.168.178.121:8487
+- System 2:
+    - NetData:
+        href: http://192.168.178.121:19999/
+        description: Real-time performance monitoring
+        icon: netdata.png
+        widget:
+         type: netdata
+         hideErrors: true
+         url: http://192.168.178.121:19999
+    - Code server:
+        href: http://192.168.178.121:8443/
+        description: Web-based IDE for config & database management
+        icon: code-server.png
+    - Glances:
+        href: http://192.168.178.121:61208/
+        description: System monitoring dashboard
+        icon: glances.png
+
+# Detailed System Monitoring Widgets
+- System Monitor:
+    - CPU Usage:
+        widget:
+          type: glances
+          url: http://192.168.178.121:61208
+          version: 4
+          icon: plex.png
+          metric: cpu
+          diskUnits: bytes
+          refreshInterval: 2000
+          pointsLimit: 20
+    - Network:
+        widget:
+          type: glances
+          url: http://192.168.178.121:61208
+          version: 4
+          metric: network:br0
+          refreshInterval: 2000
+          pointsLimit: 2000         
+    - RAM:
+        widget:
+          type: glances
+          url: http://192.168.178.121:61208
+          version: 4
+          metric: memory
+          diskUnits: bytes
+          refreshInterval: 2000
+          pointsLimit: 20
+    - Processes:
+        widget:
+          type: glances
+          url: http://192.168.178.121:61208
+          version: 4
+          metric: process
+          diskUnits: bytes
+          refreshInterval: 10000
+          pointsLimit: 20
+
+
+##################################################################################
+# Version: 2
+# Recently added media widget for Homepage dashboard using Tautulli API & LazyLibrarian API
+#
+# - This shows the 6 most recently added Plex items from your Movie, Shows and Music library
+# - Additionally, it will show the 6 most recently added Books, Audiobooks and Magazines from LazyLibrarian
+# - The date shown in the additionalField is the date the item was added to your library. This can be changed to the release date or episode title or author etc by changing the field
+#
+# Note: The custom.css id has changed from tautulli_recent to list
+##################################################################################
+ 
+##################################################################################
+# Add to services.yaml
+#
+# 1. Replace {{HOMEPAGE_VAR_TAUTULLI_IPPORT}} with your Tautulli IP:PORT (on Docker with Tautulli and Homepage on the same network, use tautulli:8181)
+# 2. Replace {{HOMEPAGE_VAR_TAUTULLI_API_KEY}} with your Tautulli API key (Tautulli > Settings > Web Interface > API)
+# 3. Change count=6 to whatever you want then add/remove mappings to match. Note mappings start at 0 not 1
+# 4. For TV you need to set your section_id in the Tautulli API URL. You can get this using http://{{HOMEPAGE_VAR_TAUTULLI_IPPORT}}/api/v2?apikey={{HOMEPAGE_VAR_TAUTULLI_API_KEY}}&cmd=get_libraries
+# 5. Replace {{HOMEPAGE_VAR_LAZYLIBRARIAN_API_KEY}} with your LazyLibrarian API key (LazyLibrarian > Config > API Read-Only key)
+# 6. Replace {{HOMEPAGE_VAR_LAZYLIBRARIAN_IPPORT}} with your LazyLibrarian IP:PORT (on Docker with LazyLbrarian and Homepage on the same network, use lazylibrarian:5299)
+##################################################################################
+ 
+- Most Recent:
+    ##################################################################################
+    # Movies
+    ##################################################################################
+    - Movies:
+        icon: mdi-movie
+        id: list
+        widget:
+          type: customapi
+          url: http://{{HOMEPAGE_VAR_TAUTULLI_IPPORT2}}/api/v2?apikey={{HOMEPAGE_VAR_TAUTULLI_API}}&cmd=get_recently_added&count=10&media_type=movie
+          display: list
+          mappings:
+            - field:
+                response:
+                  data:
+                    recently_added:
+                      0: title
+              additionalField:
+                field:
+                  response:
+                    data:
+                      recently_added:
+                        0: added_at
+                scale: 1000
+                format: relativeDate # if date, uncomment dateStyle & timeStyle if required
+                locale: en-GB
+                numeric: auto
+                style: narrow # long, short, narrow
+                # dateStyle: medium # ["full", "long", "medium", "short"]
+                # timeStyle: medium # ["full", "long", "medium", "short"]
+                color: theme
+            - field:
+                response:
+                  data:
+                    recently_added:
+                      1: title
+              color: theme
+              additionalField:
+                field:
+                  response:
+                    data:
+                      recently_added:
+                        1: added_at
+                scale: 1000
+                format: relativeDate # if date, uncomment dateStyle & timeStyle if required
+                locale: en-GB
+                numeric: auto
+                style: narrow # long, short, narrow
+                # dateStyle: medium # ["full", "long", "medium", "short"]
+                # timeStyle: medium # ["full", "long", "medium", "short"]
+                color: theme
+            - field:
+                response:
+                  data:
+                    recently_added:
+                      2: title
+              additionalField:
+                field:
+                  response:
+                    data:
+                      recently_added:
+                        2: added_at
+                scale: 1000
+                format: relativeDate # if date, uncomment dateStyle & timeStyle if required
+                locale: en-GB
+                numeric: auto
+                style: narrow # long, short, narrow
+                # dateStyle: medium # ["full", "long", "medium", "short"]
+                # timeStyle: medium # ["full", "long", "medium", "short"]
+                color: theme
+            - field:
+                response:
+                  data:
+                    recently_added:
+                      3: title
+              additionalField:
+                field:
+                  response:
+                    data:
+                      recently_added:
+                        3: added_at
+                scale: 1000
+                format: relativeDate # if date, uncomment dateStyle & timeStyle if required
+                locale: en-GB
+                numeric: auto
+                style: narrow # long, short, narrow
+                # dateStyle: medium # ["full", "long", "medium", "short"]
+                # timeStyle: medium # ["full", "long", "medium", "short"]
+                color: theme
+            - field:
+                response:
+                  data:
+                    recently_added:
+                      4: title
+              additionalField:
+                field:
+                  response:
+                    data:
+                      recently_added:
+                        4: added_at
+                scale: 1000
+                format: relativeDate # if date, uncomment dateStyle & timeStyle if required
+                locale: en-GB
+                numeric: auto
+                style: narrow # long, short, narrow
+                # dateStyle: medium # ["full", "long", "medium", "short"]
+                # timeStyle: medium # ["full", "long", "medium", "short"]
+                color: theme
+            - field:
+                response:
+                  data:
+                    recently_added:
+                      5: title
+              additionalField:
+                field:
+                  response:
+                    data:
+                      recently_added:
+                        5: added_at
+                scale: 1000
+                format: relativeDate # if date, uncomment dateStyle & timeStyle if required
+                locale: en-GB
+                numeric: auto
+                style: narrow # long, short, narrow
+                # dateStyle: medium # ["full", "long", "medium", "short"]
+                # timeStyle: medium # ["full", "long", "medium", "short"]
+                color: theme
+            - field:
+                response:
+                  data:
+                    recently_added:
+                      6: title
+              additionalField:
+                field:
+                  response:
+                    data:
+                      recently_added:
+                        6: added_at
+                scale: 1000
+                format: relativeDate # if date, uncomment dateStyle & timeStyle if required
+                locale: en-GB
+                numeric: auto
+                style: narrow # long, short, narrow
+                # dateStyle: medium # ["full", "long", "medium", "short"]
+                # timeStyle: medium # ["full", "long", "medium", "short"]
+                color: theme
+            - field:
+                response:
+                  data:
+                    recently_added:
+                      7: title
+              additionalField:
+                field:
+                  response:
+                    data:
+                      recently_added:
+                        7: added_at
+                scale: 1000
+                format: relativeDate # if date, uncomment dateStyle & timeStyle if required
+                locale: en-GB
+                numeric: auto
+                style: narrow # long, short, narrow
+                # dateStyle: medium # ["full", "long", "medium", "short"]
+                # timeStyle: medium # ["full", "long", "medium", "short"]
+                color: theme
+            - field:
+                response:
+                  data:
+                    recently_added:
+                      8: title
+              additionalField:
+                field:
+                  response:
+                    data:
+                      recently_added:
+                        8: added_at
+                scale: 1000
+                format: relativeDate # if date, uncomment dateStyle & timeStyle if required
+                locale: en-GB
+                numeric: auto
+                style: narrow # long, short, narrow
+                # dateStyle: medium # ["full", "long", "medium", "short"]
+                # timeStyle: medium # ["full", "long", "medium", "short"]
+                color: theme
+            - field:
+                response:
+                  data:
+                    recently_added:
+                      9: title
+              additionalField:
+                field:
+                  response:
+                    data:
+                      recently_added:
+                        9: added_at
+                scale: 1000
+                format: relativeDate # if date, uncomment dateStyle & timeStyle if required
+                locale: en-GB
+                numeric: auto
+                style: narrow # long, short, narrow
+                # dateStyle: medium # ["full", "long", "medium", "short"]
+                # timeStyle: medium # ["full", "long", "medium", "short"]
+                color: theme 
+    ##################################################################################
+    # TV
+    ##################################################################################
+    - TV:
+        icon: mdi-television
+        id: list
+        widget:
+          type: customapi
+          url: http://{{HOMEPAGE_VAR_TAUTULLI_IPPORT2}}/api/v2?apikey={{HOMEPAGE_VAR_TAUTULLI_API}}&cmd=get_recently_added&count=10&media_type=episode&section_id=2
+          display: list
+          mappings:
+            - field:
+                response:
+                  data:
+                    recently_added:
+                      0: grandparent_title
+              additionalField:
+                field:
+                  response:
+                    data:
+                      recently_added:
+                        0: added_at
+                scale: 1000
+                format: relativeDate # if date, uncomment dateStyle & timeStyle if required
+                locale: en-GB
+                numeric: auto
+                style: narrow # long, short, narrow
+                # dateStyle: medium # ["full", "long", "medium", "short"]
+                # timeStyle: medium # ["full", "long", "medium", "short"]
+                color: theme                      
+            - field:
+                response:
+                  data:
+                    recently_added:
+                      1: grandparent_title
+              additionalField:
+                field:
+                  response:
+                    data:
+                      recently_added:
+                        1: added_at
+                scale: 1000
+                format: relativeDate # if date, uncomment dateStyle & timeStyle if required
+                locale: en-GB
+                numeric: auto
+                style: narrow # long, short, narrow
+                # dateStyle: medium # ["full", "long", "medium", "short"]
+                # timeStyle: medium # ["full", "long", "medium", "short"]
+                color: theme                  
+            - field:
+                response:
+                  data:
+                    recently_added:
+                      2: grandparent_title
+              additionalField:
+                field:
+                  response:
+                    data:
+                      recently_added:
+                        2: added_at
+                scale: 1000
+                format: relativeDate # if date, uncomment dateStyle & timeStyle if required
+                locale: en-GB
+                numeric: auto
+                style: narrow # long, short, narrow
+                # dateStyle: medium # ["full", "long", "medium", "short"]
+                # timeStyle: medium # ["full", "long", "medium", "short"]
+                color: theme                      
+            - field:
+                response:
+                  data:
+                    recently_added:
+                      3: grandparent_title
+              additionalField:
+                field:
+                  response:
+                    data:
+                      recently_added:
+                        3: added_at
+                scale: 1000
+                format: relativeDate # if date, uncomment dateStyle & timeStyle if required
+                locale: en-GB
+                numeric: auto
+                style: narrow # long, short, narrow
+                # dateStyle: medium # ["full", "long", "medium", "short"]
+                # timeStyle: medium # ["full", "long", "medium", "short"]
+                color: theme               
+            - field:
+                response:
+                  data:
+                    recently_added:
+                      4: grandparent_title
+              additionalField:
+                field:
+                  response:
+                    data:
+                      recently_added:
+                        4: added_at
+                scale: 1000
+                format: relativeDate # if date, uncomment dateStyle & timeStyle if required
+                locale: en-GB
+                numeric: auto
+                style: narrow # long, short, narrow
+                # dateStyle: medium # ["full", "long", "medium", "short"]
+                # timeStyle: medium # ["full", "long", "medium", "short"]
+                color: theme                      
+            - field:
+                response:
+                  data:
+                    recently_added:
+                      5: grandparent_title
+              additionalField:
+                field:
+                  response:
+                    data:
+                      recently_added:
+                        5: added_at
+                scale: 1000
+                format: relativeDate # if date, uncomment dateStyle & timeStyle if required
+                locale: en-GB
+                numeric: auto
+                style: narrow # long, short, narrow
+                # dateStyle: medium # ["full", "long", "medium", "short"]
+                # timeStyle: medium # ["full", "long", "medium", "short"]
+                color: theme
+            - field:
+                response:
+                  data:
+                    recently_added:
+                      6: grandparent_title
+              additionalField:
+                field:
+                  response:
+                    data:
+                      recently_added:
+                        6: added_at
+                scale: 1000
+                format: relativeDate # if date, uncomment dateStyle & timeStyle if required
+                locale: en-GB
+                numeric: auto
+                style: narrow # long, short, narrow
+                # dateStyle: medium # ["full", "long", "medium", "short"]
+                # timeStyle: medium # ["full", "long", "medium", "short"]
+                color: theme                      
+            - field:
+                response:
+                  data:
+                    recently_added:
+                      7: grandparent_title
+              additionalField:
+                field:
+                  response:
+                    data:
+                      recently_added:
+                        7: added_at
+                scale: 1000
+                format: relativeDate # if date, uncomment dateStyle & timeStyle if required
+                locale: en-GB
+                numeric: auto
+                style: narrow # long, short, narrow
+                # dateStyle: medium # ["full", "long", "medium", "short"]
+                # timeStyle: medium # ["full", "long", "medium", "short"]
+                color: theme                      
+            - field:
+                response:
+                  data:
+                    recently_added:
+                      8: grandparent_title
+              additionalField:
+                field:
+                  response:
+                    data:
+                      recently_added:
+                        8: added_at
+                scale: 1000
+                format: relativeDate # if date, uncomment dateStyle & timeStyle if required
+                locale: en-GB
+                numeric: auto
+                style: narrow # long, short, narrow
+                # dateStyle: medium # ["full", "long", "medium", "short"]
+                # timeStyle: medium # ["full", "long", "medium", "short"]
+                color: theme                      
+            - field:
+                response:
+                  data:
+                    recently_added:
+                      9: grandparent_title
+              additionalField:
+                field:
+                  response:
+                    data:
+                      recently_added:
+                        9: added_at
+                scale: 1000
+                format: relativeDate # if date, uncomment dateStyle & timeStyle if required
+                locale: en-GB
+                numeric: auto
+                style: narrow # long, short, narrow
+                # dateStyle: medium # ["full", "long", "medium", "short"]
+                # timeStyle: medium # ["full", "long", "medium", "short"]
+                color: theme                      
+    - Media Upcoming:
+        widget:
+          icon: tautulli.png
+          type: calendar
+          firstDayInWeek: monday # optional - defaults to monday
+          view: monthly # optional - possible values monthly, agenda
+          maxEvents: 10 # optional - defaults to 10
+          showTime: true # optional - show time for event happening today - defaults to false
+          timezone: Europe/Dublin # optional and only when timezone is not detected properly (slightly slower performance) - force timezone for ical events (if it's the same - no change, if missing or different in ical - will be converted to this timezone)
+          integrations: # optional
+            - type: sonarr # active widget type that is currently enabled on homepage - possible values: radarr, sonarr, lidarr, readarr, ical
+              service_group: Starr Apps # group name where widget exists
+              service_name: Sonarr # service name for that widget
+              color: teal # optional - defaults to pre-defined color for the service (teal for sonarr)
+              params: # optional - additional params for the service
+                unmonitored: true # optional - defaults to false, used with *arr stack
+            - type: radarr # active widget type that is currently enabled on homepage - possible values: radarr, sonarr, lidarr, readarr, ical
+              service_group: Starr Apps # group name where widget exists
+              service_name: Radarr # service name for that widget
+              color:  # optional - defaults to pre-defined color for the service (teal for sonarr)
+              params: # optional - additional params for the service
+                unmonitored: true # optional - defaults to false, used with *arr stack    
+
+# End of configuration

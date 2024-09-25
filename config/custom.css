@@ -1,0 +1,23 @@
+#list>div>div.relative.flex.flex-row.w-full.service-container {
+    &>div>div {
+        display: block;
+ 
+        &>div.flex.flex-row.text-right {
+ 
+            &>div:nth-child(0) {
+                display: none;
+            }
+ 
+            &>div:nth-child(1) {
+                text-align: left;
+                margin-left: .5rem;
+            }
+ 
+            &>div:nth-child(2) {
+                text-align: right;
+                margin-left: auto;
+            }
+        }
+    }
+}
+ 
