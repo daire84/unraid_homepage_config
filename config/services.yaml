@@ -21,7 +21,7 @@
         icon: portainer.png
         ping: http://192.168.178.121:9000
     - Notifiarr:
-        href: http://192.168.178.121:5456/
+        href: https://notify.funkstew.com/
         description: Notifiarr Client management
         # Consider using a local icon for consistency
         icon: https://avatars.githubusercontent.com/u/77931263?s=200&v=4
@@ -206,28 +206,28 @@
 # System Management and Monitoring Section
 - System:
     - Nginx Proxy Manager:
-        href: http://192.168.178.121:7818/
+        href: https://npm.funkstew.com/
         description: Reverse proxy management
         icon: nginx-proxy-manager.png
         widget:
          type: npm
-         url: http://192.168.178.121:7818
+         url: https://npm.funkstew.com
          username: {{HOMEPAGE_VAR_NPM_USERNAME}}
          password: {{HOMEPAGE_VAR_NPM_PASSWORD}}          
     - Speedtest Tracker:
-        href: http://192.168.178.121:8484/
+        href: https://speed.funkstew.com/
         description: Periodic Internet speed testing
         icon: speedtest-tracker-old.png
         widget:
          type: speedtest
-         url: http://192.168.178.121:8484
+         url: https://speed.funkstew.com
     - Uptime Kuma:
-        href: http://192.168.178.121:3001/
+        href: https://kuma.funkstew.com/
         description: Service uptime monitoring
         icon: uptime-kuma.png
         widget:
          type: uptimekuma
-         url: http://192.168.178.121:3001
+         url: https://kuma.funkstew.com
          slug: homepage
     - Scrutiny:
         href: http://192.168.178.121:8487/
@@ -247,7 +247,7 @@
          hideErrors: true
          url: http://192.168.178.121:19999
     - Code server:
-        href: http://192.168.178.121:8443/
+        href: https://code.funkstew.com/
         description: Web-based IDE for config & database management
         icon: code-server.png
     - Glances:
