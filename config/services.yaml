@@ -11,26 +11,26 @@
 # Core services for server and network management
 - Infrastructure:
     - Unraid:
-        href: http://192.168.178.121/Dashboard
+        href: http://{{HOMEPAGE_VAR_IP}}/Dashboard
         description: Funkserver - Media Centre
         icon: unraid-alt.png
-        ping: http://192.168.178.121/
+        ping: http://{{HOMEPAGE_VAR_IP}}/
     - Portainer:
-        href: http://192.168.178.121:9000/#!/auth
+        href: http://{{HOMEPAGE_VAR_IP}}:9000/#!/auth
         description: Docker Management
         icon: portainer.png
-        ping: http://192.168.178.121:9000
+        ping: http://{{HOMEPAGE_VAR_IP}}:9000
     - Notifiarr:
         href: https://notify.funkstew.com/
         description: Notifiarr Client management
         # Consider using a local icon for consistency
         icon: https://avatars.githubusercontent.com/u/77931263?s=200&v=4
-        ping: http://192.168.178.121:5456
+        ping: http://{{HOMEPAGE_VAR_IP}}:5456
     - Prowlarr:
-        href: http://192.168.178.121:9696/
+        href: http://{{HOMEPAGE_VAR_IP}}:9696/
         description: Arr organizer
         icon: prowlarr.png
-        ping: http://192.168.178.121:9696
+        ping: http://{{HOMEPAGE_VAR_IP}}:9696
     - AdGuard Home:
         href: http://192.168.178.123:3000/
         description: Network-wide ad blocking
@@ -78,34 +78,34 @@
 # Services related to media downloading, streaming, and organization
 - Starr Apps:
     - Radarr:
-        href: http://192.168.178.121:7878/
+        href: http://radarr.funkstew.com/
         description: Movie downloads and management
         icon: radarr-light.png
-        ping: http://192.168.178.121:7878
+        ping: http://{{HOMEPAGE_VAR_IP}}:7878
         server: docker
         container: radarr
         widget:
           type: radarr
-          url: http://192.168.178.121:7878
+          url: http://{{HOMEPAGE_VAR_IP}}:7878
           key: {{HOMEPAGE_VAR_RADARR_API}}
           # API key is set in the .env file for security
     - Sonarr:
-        href: http://192.168.178.121:8989/
+        href: http://sonarr.funkstew.com/
         description: TV Show downloads and management
         icon: sonarr.png
-        ping: http://192.168.178.121:8989
+        ping: http://{{HOMEPAGE_VAR_IP}}:8989
         server: docker
         container: sonarr
         widget:
           type: sonarr
-          url: http://192.168.178.121:8989
+          url: http://{{HOMEPAGE_VAR_IP}}:8989
           key: {{HOMEPAGE_VAR_SONARR_API}}
                   # API key is set in the .env file for security
     - Overseerr:
         href: https://overseerr.funkstew.com/
         description: Media requests and user management
         icon: overseerr.png
-        ping: http://192.168.178.121:8455
+        ping: https://overseerr.funkstew.com
         server: docker
         container: overseerr
         # Requires Radarr and Sonarr to be configured for full functionality
@@ -118,66 +118,66 @@
 - Media:
      - Plex:
         icon: plex-alt-light.png
-        href: http://192.168.178.121:32400/web/index.html#!/
+        href: https://plex.funkstew.com/web/index.html#!
         description: Watch movies and TV shows
-        ping: http://192.168.178.121:32400
+        ping: http://{{HOMEPAGE_VAR_IP}}:32400
         server: docker
         container: Plex-Media-Server
         widget:
           type: plex
-          url: http://192.168.178.121:32400
+          url: http://{{HOMEPAGE_VAR_IP}}:32400
           key: {{HOMEPAGE_VAR_PLEX_TOKEN}}
      - Tautulli:
-         href: http://192.168.178.121:8182/home
+         href: https://tautulli.funkstew.com/
          description: Plex statistics and monitoring
          icon: tautulli.png
-         ping: http://192.168.178.121:8182
+         ping: https://tautulli.funkstew.com
          server: docker
          container: tautulli
          widget:
           type: tautulli
-          url: http://192.168.178.121:8182
+          url: https://tautulli.funkstew.com
           key: {{HOMEPAGE_VAR_TAUTULLI_API}}
           enableUser: true # Shows which user is streaming
           showEpisodeNumber: true # Useful for tracking TV show progress
           expandOneStreamToTwoRows: true # Provides more detailed information per stream
      - Tdarr:
-        href: http://192.168.178.121:8265/
+        href: http://tdarr.funkstew.com/
         description: Automated media transcoding
         icon: tdarr.png
-        ping: http://192.168.178.121:8265
+        ping: http://{{HOMEPAGE_VAR_IP}}:8265
         server: docker
         container: tdarr        
         widget:
          type: tdarr
-         url: http://192.168.178.121:8265
+         url: http://{{HOMEPAGE_VAR_IP}}:8265
      - Wizarr:
          href: https://invites.funkstew.com/
          description: Invite manager for Plex & Overseerr
          icon: wizarr.png
-         ping: http://192.168.178.121:5690
+         ping: http://{{HOMEPAGE_VAR_IP}}:5690
          server: docker
          container: wizarr
 
 # Download Management Section
 - Downloaders:
     - SABnzb:
-        href: http://192.168.178.121:8084/
+        href: http://sab.funkstew.com/
         description: Usenet downloader
         icon: sabnzbd-alt.png
-        ping: http://192.168.178.121:8084
+        ping: http://{{HOMEPAGE_VAR_IP}}:8084
         widget:
           type: sabnzbd
-          url: http://192.168.178.121:8084
+          url: http://{{HOMEPAGE_VAR_IP}}:8084
           key: {{HOMEPAGE_VAR_SABNZB_API}}
     - qBittorrent:
-        href: http://192.168.178.121:8080/
+        href: http://qbit.funkstew.com/
         description: Torrent downloader
         icon: qbittorrent.png
-        ping: http://192.168.178.121:8080
+        ping: http://{{HOMEPAGE_VAR_IP}}:8080
         widget:
           type: qbittorrent
-          url: http://192.168.178.121:8080
+          url: http://{{HOMEPAGE_VAR_IP}}:8080
           username: {{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}
           password: {{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}
 
@@ -187,19 +187,19 @@
         href: http://pics.funkstew.com
         description: Self-hosted photo and video backup
         icon: immich.png
-        ping: http://192.168.178.121:8088
+        ping: http://{{HOMEPAGE_VAR_IP}}:8088
         widget:
          type: immich
-         url: http://192.168.178.121:8088
+         url: http://{{HOMEPAGE_VAR_IP}}:8088
          key: {{HOMEPAGE_VAR_IMMICH_API}}
     - Nextcloud:
         href: http://nextcloud.funkstew.com
         description: Self-hosted cloud storage and collaboration
         icon: nextcloud.png
-        ping: http://192.168.178.121:444
+        ping: http://{{HOMEPAGE_VAR_IP}}:444
         widget:
          type: nextcloud
-         url: https://192.168.178.121:444
+         url: https://{{HOMEPAGE_VAR_IP}}:444
          username: {{HOMEPAGE_VAR_NEXTCLOUD_USERNAME}}
          password: {{HOMEPAGE_VAR_NEXTCLOUD_PASSWORD}}
 
@@ -230,28 +230,28 @@
          url: https://kuma.funkstew.com
          slug: homepage
     - Scrutiny:
-        href: http://192.168.178.121:8487/
+        href: http://{{HOMEPAGE_VAR_IP}}:8487/
         description: Hard drive S.M.A.R.T monitoring
         icon: scrutiny-light.png
         widget:
          type: scrutiny 
          hideErrors: true
-         url: http://192.168.178.121:8487
+         url: http://{{HOMEPAGE_VAR_IP}}:8487
 - System 2:
     - NetData:
-        href: http://192.168.178.121:19999/
+        href: http://{{HOMEPAGE_VAR_IP}}:19999/
         description: Real-time performance monitoring
         icon: netdata.png
         widget:
          type: netdata
          hideErrors: true
-         url: http://192.168.178.121:19999
+         url: http://{{HOMEPAGE_VAR_IP}}:19999
     - Code server:
         href: https://code.funkstew.com/
         description: Web-based IDE for config & database management
         icon: code-server.png
     - Glances:
-        href: http://192.168.178.121:61208/
+        href: http://{{HOMEPAGE_VAR_IP}}:61208/
         description: System monitoring dashboard
         icon: glances.png
 
@@ -260,7 +260,7 @@
     - CPU Usage:
         widget:
           type: glances
-          url: http://192.168.178.121:61208
+          url: http://{{HOMEPAGE_VAR_IP}}:61208
           version: 4
           icon: plex.png
           metric: cpu
@@ -270,7 +270,7 @@
     - Network:
         widget:
           type: glances
-          url: http://192.168.178.121:61208
+          url: http://{{HOMEPAGE_VAR_IP}}:61208
           version: 4
           metric: network:br0
           refreshInterval: 2000
@@ -278,7 +278,7 @@
     - RAM:
         widget:
           type: glances
-          url: http://192.168.178.121:61208
+          url: http://{{HOMEPAGE_VAR_IP}}:61208
           version: 4
           metric: memory
           diskUnits: bytes
@@ -287,7 +287,7 @@
     - Processes:
         widget:
           type: glances
-          url: http://192.168.178.121:61208
+          url: http://{{HOMEPAGE_VAR_IP}}:61208
           version: 4
           metric: process
           diskUnits: bytes
